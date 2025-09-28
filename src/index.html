@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit of Words - Membangun Kebiasaan Membaca Bersama</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 20%, #cd853f 40%, #deb887 60%, #f5deb3 80%, #f5f5dc 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            object-fit: cover;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .floating-books {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .book {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .book:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .book:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .book:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+        .book:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 3s; }
+        .book:nth-child(5) { top: 50%; left: 5%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            margin-top: 100px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-content .description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #8b4513 0%, #a0522d 50%, #cd853f 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.6);
+            background: linear-gradient(45deg, #a0522d 0%, #cd853f 50%, #deb887 100%);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #8b4513;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-white {
+            background: white;
+        }
+
+        .section-light {
+            background: linear-gradient(180deg, #faf0e6 0%, #f5f5dc 50%, #faf8f5 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #8b4513 0%, #a0522d 25%, #cd853f 50%, #deb887 75%, #f5deb3 100%);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Story Section */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 4rem;
+        }
+
+        .story-card {
+            background: linear-gradient(135deg, #ffffff 0%, #faf8f5 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #8b4513;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.2);
+            border-left: 5px solid #cd853f;
+        }
+
+        .story-card h3 {
+            color: #8b4513;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #faf8f5 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+            transition: all 0.3s ease;
+            border-top: 3px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+            border-top: 3px solid #cd853f;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f0e8 100%);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 25%, #cd853f 50%, #d2b48c 75%, #deb887 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 3rem;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #f5deb3 0%, #deb887 25%, #d2b48c 50%, #bc9a6a 75%, #a0522d 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(139, 69, 19, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .cta:hover::before {
+            background: rgba(139, 69, 19, 0.05);
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a:hover {
+            color: #f5deb3;
+            background: rgba(245, 222, 179, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="img.jpg" 
+        </div>
+        <div class="floating-books">
+            <div class="book">📚</div>
+            <div class="book">📖</div>
+            <div class="book">📕</div>
+            <div class="book">📗</div>
+            <div class="book">📘</div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>HABIT OF WORDS</h1>
+                <p class="subtitle">Membangun Kebiasaan Membaca untuk Masa Depan yang Lebih Cerah</p>
+                <p class="description">
+                    Bergabunglah dengan komunitas pembaca yang berkomitmen untuk membangun kebiasaan membaca konsisten. 
+                    Bersama-sama kita wujudkan literasi yang lebih baik untuk Indonesia.
+                </p>
+                <div class="btn-group">
+                    <a href="https://t.me/addlist/zdbfSakayj0xZjU1" class="btn btn-primary" target="_blank">
+                        📱 Gabung Telegram
+                    </a>
+                    <a href="https://asteriacanopus7.blogspot.com/p/habit-of-words.html?fbclid=PAb21jcANGLwJleHRuA2FlbQIxMQABp024nTVoiyoJ5EenDl0MYOUFFkB1ShpAfK6oRVYy0ebbWvJxjS1KiPOhayea_aem_2Uh3rd7fukqF72K6FcUNVg&m=1" class="btn btn-secondary" target="_blank">
+                        🌐 Kunjungi Blog
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Story Section -->
+    <section id="story" class="section-white">
+        <div class="container">
+            <h2 class="section-title fade-in">Cerita Kami</h2>
+            <div class="story-grid">
+                <div class="story-card fade-in">
+                    <h3>🌟 Awal Mula</h3>
+                    <p>
+                        Pada tanggal 7 April 2025, dua orang yang gemar membaca, Asteria dan Meisha, 
+                        bertekad untuk membangun kebiasaan membaca yang konsisten. Dari kesamaan tujuan 
+                        dan tantangan yang sama, lahirlah HABIT OF WORDS.
+                    </p>
+                </div>
+                <div class="story-card fade-in">
+                    <h3>🎯 Misi Kami</h3>
+                    <p>
+                        Membantu memenuhi kebutuhan literasi bagi semua kalangan, menjadi solusi untuk 
+                        mereka yang ingin menyempatkan waktu untuk membaca. Membangun kesadaran akan 
+                        pentingnya kebiasaan sederhana yang berdampak besar.
+                    </p>
+                </div>
+                <div class="story-card fade-in">
+                    <h3>🚀 Dimulai</h3>
+                    <p>
+                        Tanggal 24 April 2025, kami resmi memulai perjalanan ini. Meskipun menghadapi 
+                        berbagai kendala di awal, Alhamdulillah semua berjalan lancar dengan dukungan 
+                        komunitas yang luar biasa.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section-light">
+        <div class="container">
+            <h2 class="section-title fade-in">Mengapa Habit of Words?</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">👥</div>
+                    <h3>Komunitas Suportif</h3>
+                    <p>Bergabung dengan pembaca lain yang memiliki tujuan sama untuk saling mendukung dan memotivasi</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📅</div>
+                    <h3>Konsistensi Terjaga</h3>
+                    <p>Sistem tracking dan reminder yang membantu Anda tetap konsisten dalam kebiasaan membaca</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📚</div>
+                    <h3>Beragam Referensi</h3>
+                    <p>Akses ke rekomendasi buku berkualitas dari berbagai genre untuk memperluas wawasan</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Progress Tracking</h3>
+                    <p>Pantau perkembangan membaca Anda dan rayakan setiap pencapaian bersama komunitas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <h2 class="section-title fade-in" style="color: white;">Dampak Literasi</h2>
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <h3>60%</h3>
+                    <p>Peningkatan kemampuan berpikir kritis</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>45%</h3>
+                    <p>Peningkatan vocabulary</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>30%</h3>
+                    <p>Peningkatan fokus dan konsentrasi</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>75%</h3>
+                    <p>Peningkatan empati dan pemahaman</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="fade-in">
+                <h2>Siap Memulai Perubahan?</h2>
+                <p>
+                    Bergabunglah dengan ribuan pembaca lain yang sudah merasakan manfaat luar biasa 
+                    dari kebiasaan membaca yang konsisten. Ikuti juga konten inspiratif kami di platform lain!
+                </p>
+                <div class="btn-group" style="margin-bottom: 2rem;">
+                    <a href="https://t.me/addlist/zdbfSakayj0xZjU1" class="btn btn-secondary" target="_blank" style="background: white; color: #8b4513;">
+                        📱 Join Telegram
+                    </a>
+                    <a href="https://www.instagram.com/habitofwords?igsh=MW95ZjRpZmY4dGloNg==" class="btn btn-secondary" target="_blank" style="background: white; color: #8b4513;">
+                        📷 Follow Instagram
+                    </a>
+                </div>
+                <div class="btn-group">
+                    <a href="https://asteriacanopus7.blogspot.com/p/habit-of-words.html?fbclid=PAb21jcANGLwJleHRuA2FlbQIxMQABp024nTVoiyoJ5EenDl0MYOUFFkB1ShpAfK6oRVYy0ebbWvJxjS1KiPOhayea_aem_2Uh3rd7fukqF72K6FcUNVg&m=1" class="btn btn-secondary" target="_blank" style="background: rgba(255,255,255,0.2); border: 2px solid white;">
+                        🌐 Baca Blog Kami
+                    </a>
+                    <a href="https://www.tiktok.com/@habitofwords?_t=ZS-906hOV3WB4J&_r=1" class="btn btn-secondary" target="_blank" style="background: rgba(255,255,255,0.2); border: 2px solid white;">
+                        🎵 TikTok Content
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <img src="https://instagram.fsub6-6.fna.fbcdn.net/v/t51.2885-19/495129963_17843430846480096_7493074271929488074_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.fsub6-6.fna.fbcdn.net&_nc_cat=100&_nc_oc=Q6cZ2QGK-jvqhmE3gkmC4psaT4sOGydqKA5RcCbW9domKdYPwfuf6u_x9T24zp0As6oH93I&_nc_ohc=gK4rdaLr4O4Q7kNvwFRjb_g&_nc_gid=q4CcfTIYoOIRUAaqXhSjCg&edm=AEYEu-QBAAAA&ccb=7-5&oh=00_AfYcqrT7FgE1mTH4J9FSJWKsjqY9S8v9hVuCNyRRM0HjgA&oe=68DF46A6&_nc_sid=ead929" alt="Habit of Words" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.3); object-fit: cover;">
+                    <h3>HABIT OF WORDS</h3>
+                    <p>Membangun kebiasaan membaca untuk masa depan yang lebih cerah</p>
+                    <div style="margin-top: 15px;">
+                        <p><strong>Ikuti Kami:</strong></p>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">
+                            📱 Telegram • 🌐 Blog • 📷 Instagram • 🎵 TikTok
+                        </p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://t.me/addlist/zdbfSakayj0xZjU1" target="_blank" title="Join Telegram Group">📱</a>
+                    <a href="https://asteriacanopus7.blogspot.com/p/habit-of-words.html?fbclid=PAb21jcANGLwJleHRuA2FlbQIxMQABp024nTVoiyoJ5EenDl0MYOUFFkB1ShpAfK6oRVYy0ebbWvJxjS1KiPOhayea_aem_2Uh3rd7fukqF72K6FcUNVg&m=1" target="_blank" title="Visit Blog">🌐</a>
+                    <a href="https://www.instagram.com/habitofwords?igsh=MW95ZjRpZmY4dGloNg==" target="_blank" title="Follow Instagram">📷</a>
+                    <a href="https://www.tiktok.com/@habitofwords?_t=ZS-906hOV3WB4J&_r=1" target="_blank" title="Follow TikTok">🎵</a>
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #555;">
+                <p>&copy; 2025 Habit of Words. Dibuat dengan ❤️ untuk Indonesia yang lebih literat.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
