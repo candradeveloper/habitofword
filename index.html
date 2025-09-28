@@ -14,9 +14,10 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #8b4513 0%, #a0522d 20%, #cd853f 40%, #deb887 60%, #f5deb3 80%, #f5f5dc 100%);
+            color: white;
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #cd853f 100%);
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         .container {
@@ -36,89 +37,61 @@
         }
 
         .logo-container {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
+            margin-bottom: 3rem;
             animation: fadeInDown 1s ease-out;
         }
 
         .logo-img {
-            width: 220px;
-            height: auto;
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
             object-fit: cover;
         }
 
         .logo-img:hover {
-            transform: scale(1.05);
-            border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 25px 85px rgba(0, 0, 0, 0.4);
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
         }
 
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateX(-50%) translateY(-30px);
+                transform: translateY(-30px);
             }
             to {
                 opacity: 1;
-                transform: translateX(-50%) translateY(0);
+                transform: translateY(0);
             }
-        }
-
-        .floating-books {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        .book {
-            position: absolute;
-            font-size: 2rem;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .book:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-        .book:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
-        .book:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
-        .book:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 3s; }
-        .book:nth-child(5) { top: 50%; left: 5%; animation-delay: 4s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
         }
 
         .hero-content h1 {
             font-size: 3.5rem;
-            margin-bottom: 1rem;
-            margin-top: 100px;
+            margin-bottom: 1.5rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            letter-spacing: 2px;
+            font-weight: 300;
         }
 
         .hero-content .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 2rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.3s both;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            font-weight: 300;
         }
 
         .hero-content .description {
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto 3rem auto;
             line-height: 1.8;
-            animation: fadeInUp 1s ease-out 0.6s both;
+            animation: fadeInUp 1s ease-out 0.9s both;
+            opacity: 0.8;
         }
 
         @keyframes fadeInUp {
@@ -132,55 +105,56 @@
             }
         }
 
-        /* Buttons */
+        /* Buttons - Mirip dengan style asli */
         .btn-group {
             display: flex;
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.9s both;
+            animation: fadeInUp 1s ease-out 1.2s both;
         }
 
         .btn {
             padding: 15px 30px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             border: none;
-            border-radius: 50px;
+            border-radius: 25px;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 10px;
             transition: all 0.3s ease;
-            font-weight: 600;
+            font-weight: 500;
+            min-width: 160px;
+            justify-content: center;
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, #8b4513 0%, #a0522d 50%, #cd853f 100%);
+            background: rgba(139, 69, 19, 0.8);
             color: white;
-            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
-            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.6);
-            background: linear-gradient(45deg, #a0522d 0%, #cd853f 50%, #deb887 100%);
+            background: rgba(139, 69, 19, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
         }
 
         .btn-secondary:hover {
-            background: white;
-            color: #8b4513;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         /* Sections */
@@ -189,20 +163,18 @@
             position: relative;
         }
 
-        .section-white {
-            background: white;
-        }
-
-        .section-light {
-            background: linear-gradient(180deg, #faf0e6 0%, #f5f5dc 50%, #faf8f5 100%);
+        .section-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #333;
+            color: white;
             position: relative;
+            font-weight: 300;
         }
 
         .section-title::after {
@@ -212,39 +184,44 @@
             left: 50%;
             transform: translateX(-50%);
             width: 80px;
-            height: 4px;
-            background: linear-gradient(45deg, #8b4513 0%, #a0522d 25%, #cd853f 50%, #deb887 75%, #f5deb3 100%);
+            height: 3px;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 2px;
-            transition: width 0.3s ease;
         }
 
         /* Story Section */
         .story-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            gap: 30px;
             margin-top: 4rem;
         }
 
         .story-card {
-            background: linear-gradient(135deg, #ffffff 0%, #faf8f5 100%);
+            background: rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
-            border-left: 5px solid #8b4513;
         }
 
         .story-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.2);
-            border-left: 5px solid #cd853f;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .story-card h3 {
-            color: #8b4513;
+            color: white;
             margin-bottom: 1rem;
             font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        .story-card p {
+            opacity: 0.9;
+            line-height: 1.7;
         }
 
         /* Features Section */
@@ -258,18 +235,17 @@
         .feature-card {
             text-align: center;
             padding: 40px 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #faf8f5 100%);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
-            border-top: 3px solid transparent;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
-            border-top: 3px solid #cd853f;
-            background: linear-gradient(135deg, #ffffff 0%, #f5f0e8 100%);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .feature-icon {
@@ -278,18 +254,22 @@
         }
 
         .feature-card h3 {
-            color: #333;
+            color: white;
             margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .feature-card p {
+            opacity: 0.9;
+            line-height: 1.6;
         }
 
         /* Stats Section */
         .stats {
-            background: linear-gradient(135deg, #8b4513 0%, #a0522d 25%, #cd853f 50%, #d2b48c 75%, #deb887 100%);
+            background: rgba(0, 0, 0, 0.4);
             color: white;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+            backdrop-filter: blur(10px);
 
         .stats::before {
             content: '';
